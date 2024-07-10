@@ -31,8 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../3/histogram.cpp" />
-		<Unit filename="../3/histogram.h" />
+		<Unit filename="histogram.cpp" />
+		<Unit filename="histogram.h" />
+		<Unit filename="test.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
