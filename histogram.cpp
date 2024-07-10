@@ -25,8 +25,8 @@ svg_end() {
 }
 
 void
-svg_text(double left, double baseline, string text) {
-    cout << "<text x='" << left << "' y='" << baseline << "'" << ">" << text << "</text>";
+svg_text(double left, double baseline, string text,double font) {
+    cout << "<text x='" << left << "' y='" << baseline << "' " << "font-size='" << font / 16 << "em'" << ">" << text << "</text>";
 }
 
 void svg_rect(double x, double y, double width, double height, string stroke, string fill){
@@ -37,6 +37,13 @@ void svg_rect(double x, double y, double width, double height, string stroke, st
 void
 show_histogram_svg(vector<double>& bins) {
     svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
+    double font = 12;
+    cerr << "Enter font: ";
+    cin >> font;
+    if (font < 8 or font > 32){
+        cerr << "Error: select a value between 8 and 32 ";
+        cin >> font;
+    }
     double top = 0;
     double dlina = 0;
     double max_count = *max_element(bins.begin(), bins.end());
@@ -52,7 +59,7 @@ show_histogram_svg(vector<double>& bins) {
                     }
             }
         string color = COLORS[rand() % 10];
-        svg_text(Text_l, top + TEXT_BASELINE, to_string(x));
+        svg_text(Text_l, top + TEXT_BASELINE, to_string(x),font);
         double heigh =  x > 76 ? 76 : 76 * (static_cast<double>(x) / max_count);
         svg_rect(TEXT_WIDTH, top, x * 20, BIN_HEIGHT, color, color);
         }
@@ -69,7 +76,7 @@ show_histogram_svg(vector<double>& bins) {
                     }
             }
             string color = COLORS[rand() % 10];
-            svg_text(Text_l, top + TEXT_BASELINE, to_string(x));
+            svg_text(Text_l, top + TEXT_BASELINE, to_string(x),font);
             svg_rect(TEXT_WIDTH, top, x * 20 , BIN_HEIGHT, color, color);
             top += BIN_HEIGHT;
         }
